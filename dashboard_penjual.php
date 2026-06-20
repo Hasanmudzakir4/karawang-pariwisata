@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 // Proteksi akses penjual
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penjual') {

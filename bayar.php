@@ -1,11 +1,11 @@
 <?php
 
 session_start();
-require_once './../config/koneksi.php';
+require_once 'config/koneksi.php';
 
 // Proteksi akses login
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../auth/login.php");
+    header("Location: login.php");
     exit;
 }
 
@@ -58,9 +58,9 @@ try {
 
     // Lempar kembali ke dashboard masing-masing role
     if ($_SESSION['role'] === 'penjual') {
-        header("Location: ../penjual/dashboard_penjual.php#laporan");
+        header("Location: dashboard_penjual.php#laporan");
     } else {
-        header("Location: ../pembeli/dashboard_pembeli.php");
+        header("Location: dashboard_pembeli.php");
     }
     exit;
 } catch (Exception $e) {

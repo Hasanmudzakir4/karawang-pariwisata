@@ -5,7 +5,7 @@
  * CSS: assets/css/auth.css
  */
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 $error    = '';
 $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : '';
@@ -92,14 +92,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Brand -->
             <div class="auth-hero-top">
-                <a href="../index.php" class="auth-brand">
+                <a href="index.php" class="auth-brand">
                     <span class="auth-brand-icon"><i class="fa-solid fa-compass"></i></span>
                     <span class="auth-brand-text">InfoWisata Karawang<small>Kabupaten Karawang, Jawa Barat</small></span>
                 </a>
             </div>
 
             <!-- Tombol kembali -->
-            <a href="../index.php" class="auth-back">
+            <a href="index.php" class="auth-back">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
             </a>
 

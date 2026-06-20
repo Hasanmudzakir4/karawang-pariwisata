@@ -5,7 +5,7 @@
  * CSS: assets/css/auth.css
  */
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 $error   = '';
 $success = '';

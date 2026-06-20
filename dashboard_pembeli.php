@@ -99,8 +99,8 @@ try {
             </button>
             <div class="collapse navbar-collapse" id="navDashboard">
                 <ul class="navbar-nav ms-auto gap-2">
-                    <li class="nav-item"><a class="nav-link text-white-50" href="./../index.php">Beranda Publik</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-danger btn-sm text-white rounded-pill px-3.5" href="./../auth/logout.php"><i class="fa-solid fa-sign-out-alt"></i> Keluar Sesi</a></li>
+                    <li class="nav-item"><a class="nav-link text-white-50" href="index.php">Beranda Publik</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-danger btn-sm text-white rounded-pill px-3.5" href="logout.php"><i class="fa-solid fa-sign-out-alt"></i> Keluar Sesi</a></li>
                 </ul>
             </div>
         </div>
@@ -119,7 +119,7 @@ try {
                     <p class="text-muted mb-0"><i class="fa-solid fa-envelope me-1.5"></i> <?= htmlspecialchars($_SESSION['email']) ?></p>
                 </div>
                 <div>
-                    <a href="./../index.php#daftar-wisata" class="btn btn-success px-4 py-2.5 rounded-3 border-0 shadow-sm" style="background-color: var(--primary-color);">
+                    <a href="index.php#daftar-wisata" class="btn btn-success px-4 py-2.5 rounded-3 border-0 shadow-sm" style="background-color: var(--primary-color);">
                         <i class="fa-solid fa-plus-circle me-1.5"></i> Cari & Pesan Wisata Baru
                     </a>
                 </div>
@@ -153,7 +153,7 @@ try {
                 <h4 class="fw-bold text-dark">Anda Belum Memiliki Pesanan</h4>
                 <p class="text-muted mb-4 max-w-sm mx-auto">Mari mulailah perjalanan tak terlupakan bersama kami di destinasi wisata terbaik Kabupaten Karawang.</p>
                 <div>
-                    <a href="./../index.php#daftar-wisata" class="btn btn-success btn-sm rounded-pill px-3.5 py-2 hover-up shadow border-0">
+                    <a href="index.php#daftar-wisata" class="btn btn-success btn-sm rounded-pill px-3.5 py-2 hover-up shadow border-0">
                         Ambil Tiket Pertama Anda <i class="fa-solid fa-arrow-right ms-1"></i>
                     </a>
                 </div>

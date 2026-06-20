@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 // Memvalidasi ID Wisata
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;

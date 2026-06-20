@@ -1,10 +1,11 @@
 <?php
+
 /**
  * TAMPILAN TIKET DIGITAL RESMI DENGAN KODE BARCODE & STRUK BELANJA
  * Dapat langsung dicetak (print out) oleh wisatawan.
  */
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 // Proteksi akses login
 if (!isset($_SESSION['user_id'])) {
@@ -39,13 +40,13 @@ try {
     if ($tiket['status_pembayaran'] !== 'lunas') {
         die("E-Tiket belum aktif. Silakan lakukan pembayaran terlebih dahulu.");
     }
-
 } catch (PDOException $e) {
     die("Koneksi gagal: " . $e->getMessage());
 }
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +65,7 @@ try {
         .ticket-box {
             background-color: white;
             border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             max-width: 650px;
             margin: 0 auto;
             overflow: hidden;
@@ -80,7 +81,8 @@ try {
             position: relative;
         }
 
-        .ticket-header::after, .ticket-header::before {
+        .ticket-header::after,
+        .ticket-header::before {
             content: '';
             position: absolute;
             bottom: -15px;
@@ -90,8 +92,13 @@ try {
             border-radius: 50%;
         }
 
-        .ticket-header::before { left: -15px; }
-        .ticket-header::after { right: -15px; }
+        .ticket-header::before {
+            left: -15px;
+        }
+
+        .ticket-header::after {
+            right: -15px;
+        }
 
         .ticket-body {
             padding: 40px 30px;
@@ -123,12 +130,24 @@ try {
         }
 
         @media print {
-            body { background-color: #fff; padding: 0; }
-            .ticket-box { box-shadow: none; border: none; max-width: 100%; }
-            .btn-print-action { display: none; }
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .ticket-box {
+                box-shadow: none;
+                border: none;
+                max-width: 100%;
+            }
+
+            .btn-print-action {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="text-center mb-4 btn-print-action">
@@ -218,4 +237,5 @@ try {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

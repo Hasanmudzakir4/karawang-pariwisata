@@ -1,10 +1,11 @@
 <?php
+
 /**
  * AKSI PROSES CHECKOUT PEMESANAN TIKET WISATA
  * Memotong stok wisata dan mendaftarkan nominal transaksi serta tiket digital.
  */
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 // Proteksi akses login
 if (!isset($_SESSION['user_id'])) {
@@ -78,21 +79,22 @@ try {
     $_SESSION['sukses_order'] = "Pemesanan tiket berhasil didaftarkan! Silakan selesaikan pembayaran nominal Rp " . number_format($total_harga, 0, ',', '.') . " untuk mengunduh tiket digital Anda.";
     header("Location: dashboard_pembeli.php");
     exit;
-
 } catch (Exception $e) {
     if ($db->inTransaction()) {
         $db->rollBack();
     }
-    
+
     // Tampilkan pesan error dan tawarkan tombol kembali
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="id">
+
     <head>
         <meta charset="UTF-8">
         <title>Kesalahan Pemesanan - Pariwisata Karawang</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
+
     <body class="bg-light">
         <div class="container py-5 text-center">
             <div class="card p-5 shadow-sm mx-auto" style="max-width: 500px; border-radius: 20px;">
@@ -102,8 +104,9 @@ try {
             </div>
         </div>
     </body>
+
     </html>
-    <?php
+<?php
     exit;
 }
 ?>

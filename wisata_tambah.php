@@ -1,10 +1,11 @@
 <?php
+
 /**
  * FORM INPUT TAMBAH DATA WISATA (CRUD - CREATE)
  * Mendukung Upload File Gambar lokal ke folder assets/uploads/ & Fallback URL Gambar.
  */
 session_start();
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 // Proteksi akses penjual
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penjual') {
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stok_tiket = isset($_POST['stok_tiket']) ? intval($_POST['stok_tiket']) : 0;
     $jam_operasional = isset($_POST['jam_operasional']) ? trim($_POST['jam_operasional']) : '';
     $fasilitas = isset($_POST['fasilitas']) ? trim($_POST['fasilitas']) : '';
-    
+
     $gambar_final = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800"; // fallback default
 
     if (empty($nama_wisata) || empty($deskripsi) || empty($lokasi) || $harga_tiket <= 0 || $stok_tiket < 0 || empty($jam_operasional)) {
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,12 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         :root {
             --primary-color: #2E7D32;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #FAFDF6;
         }
     </style>
 </head>
+
 <body class="py-5">
 
     <div class="container" style="max-width: 800px;">
@@ -195,4 +199,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
