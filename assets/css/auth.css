@@ -1,0 +1,657 @@
+/* ============================================================
+   InfoWisata Karawang — Auth Stylesheet (login & register)
+   Design system sama dengan style.css: Hutan Tua + Emas Padi
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,400;0,600;0,700;1,500&display=swap");
+
+/* ── Variables (mirror dari style.css) ─────────────────────── */
+:root {
+  --forest: #1c3d2e;
+  --leaf: #2e6b4e;
+  --mint: #4caf7d;
+  --gold: #c8963e;
+  --gold-lt: #f0c97a;
+  --cream: #f7f3ec;
+  --cream-dk: #ede7dc;
+  --ink: #1a1f1c;
+  --muted: #6b7a70;
+  --white: #ffffff;
+  --danger: #9b2c2c;
+  --danger-bg: #fdeded;
+  --danger-bd: #f3c6c6;
+  --success: #1a5c30;
+  --success-bg: #eaf7ed;
+  --success-bd: #b9e3c3;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 36px;
+
+  --shadow-md: 0 8px 30px rgba(28, 61, 46, 0.12);
+  --shadow-lg: 0 20px 60px rgba(28, 61, 46, 0.18);
+  --shadow-btn: 0 8px 22px rgba(28, 61, 46, 0.28);
+
+  --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SHELL — split layout
+   ════════════════════════════════════════════════════════════ */
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO PANEL — kiri (login) / kanan (register)
+   ════════════════════════════════════════════════════════════ */
+.auth-hero {
+  position: relative;
+  background: var(--forest);
+  color: var(--white);
+  padding: 52px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* Gradient overlay */
+.auth-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(46, 107, 78, 0.55) 0%,
+    rgba(28, 61, 46, 0) 60%,
+    rgba(10, 22, 15, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* Foto latar */
+.auth-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.28;
+}
+
+/* Hiasan sawah SVG */
+.auth-hero-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Lingkaran cahaya di pojok */
+.auth-hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.auth-hero-glow-1 {
+  width: 320px;
+  height: 320px;
+  top: -80px;
+  right: -80px;
+  background: radial-gradient(
+    circle,
+    rgba(200, 150, 62, 0.18) 0%,
+    transparent 70%
+  );
+}
+.auth-hero-glow-2 {
+  width: 200px;
+  height: 200px;
+  bottom: 60px;
+  left: -40px;
+  background: radial-gradient(
+    circle,
+    rgba(76, 175, 125, 0.15) 0%,
+    transparent 70%
+  );
+}
+
+/* ── Hero: Top bar ──────────────────────────────────────────── */
+.auth-hero-top {
+  position: relative;
+  z-index: 2;
+}
+
+.auth-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: inherit;
+}
+.auth-brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(200, 150, 62, 0.2);
+  border: 1.5px solid rgba(240, 201, 122, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--gold-lt);
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+}
+.auth-brand-text {
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+}
+.auth-brand-text small {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-top: 2px;
+}
+
+/* ── Hero: Back link ────────────────────────────────────────── */
+.auth-back {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.83rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px 8px 12px;
+  border-radius: 999px;
+  transition: var(--transition);
+  width: fit-content;
+  margin-top: 28px;
+}
+.auth-back:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--white);
+  transform: translateX(-3px);
+}
+
+/* ── Hero: Main copy ────────────────────────────────────────── */
+.auth-hero-body {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0 20px;
+}
+
+.auth-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 18px;
+}
+.auth-hero-eyebrow::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.auth-hero-title {
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+.auth-hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold-lt);
+}
+
+.auth-hero-desc {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 380px;
+}
+
+/* ── Hero: Bottom stats / perks ─────────────────────────────── */
+.auth-hero-bottom {
+  position: relative;
+  z-index: 2;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Stats row (login) */
+.auth-stats {
+  display: flex;
+  gap: 32px;
+}
+.auth-stat strong {
+  display: block;
+  font-family: "Fraunces", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--gold-lt);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.auth-stat span {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Perks list (register) */
+.auth-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.auth-perk {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+}
+.auth-perk-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(200, 150, 62, 0.15);
+  border: 1px solid rgba(240, 201, 122, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-lt);
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   FORM PANEL
+   ════════════════════════════════════════════════════════════ */
+.auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  background: var(--cream);
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ── Panel header ───────────────────────────────────────────── */
+.auth-panel-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 10px;
+}
+
+.auth-panel-title {
+  font-family: "Fraunces", serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.auth-panel-sub {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* ── Alerts ─────────────────────────────────────────────────── */
+.auth-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-bottom: 22px;
+}
+.auth-alert i {
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.auth-alert.error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bd);
+  color: var(--danger);
+}
+.auth-alert.success {
+  background: var(--success-bg);
+  border: 1px solid var(--success-bd);
+  color: var(--success);
+}
+
+/* ── Form fields ────────────────────────────────────────────── */
+.auth-field {
+  margin-bottom: 18px;
+}
+
+.auth-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 7px;
+  letter-spacing: 0.01em;
+}
+
+.auth-input-wrap {
+  position: relative;
+}
+.auth-input-wrap i.icon-left {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--leaf);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+/* Toggle password visibility button */
+.auth-input-wrap .btn-toggle-pw {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 4px;
+  border-radius: 5px;
+  transition: color var(--transition);
+  line-height: 1;
+}
+.auth-input-wrap .btn-toggle-pw:hover {
+  color: var(--forest);
+}
+
+.auth-input-wrap input {
+  width: 100%;
+  padding: 13px 44px 13px 42px;
+  border: 1.5px solid var(--cream-dk);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.9rem;
+  color: var(--ink);
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+  line-height: 1;
+}
+.auth-input-wrap input::placeholder {
+  color: #b5afa4;
+}
+.auth-input-wrap input:focus {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 4px rgba(46, 107, 78, 0.1);
+}
+.auth-input-wrap input.has-error {
+  border-color: var(--danger);
+}
+
+.auth-field-hint {
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-top: 6px;
+  padding-left: 2px;
+}
+
+/* Strength bar (password) */
+.pw-strength-bar {
+  height: 3px;
+  border-radius: 3px;
+  background: var(--cream-dk);
+  margin-top: 8px;
+  overflow: hidden;
+}
+.pw-strength-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  width: 0;
+  transition:
+    width 0.4s ease,
+    background 0.4s ease;
+}
+
+/* ── Submit button ──────────────────────────────────────────── */
+.auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 14px;
+  background: var(--forest);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-btn);
+  margin-top: 8px;
+}
+.auth-submit:hover {
+  background: var(--leaf);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(28, 61, 46, 0.32);
+}
+.auth-submit:active {
+  transform: translateY(0);
+}
+
+/* ── Divider ────────────────────────────────────────────────── */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0 20px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--cream-dk);
+}
+
+/* ── Footer CTA ─────────────────────────────────────────────── */
+.auth-footer-cta {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.auth-footer-cta a {
+  color: var(--forest);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color var(--transition);
+}
+.auth-footer-cta a:hover {
+  border-color: var(--forest);
+}
+
+/* ── Demo box (login only) ──────────────────────────────────── */
+.auth-demo-box {
+  margin-top: 24px;
+  padding: 16px 18px;
+  background: var(--cream-dk);
+  border: 1px dashed #c9bfa8;
+  border-radius: var(--radius-md);
+}
+.auth-demo-box-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 10px;
+}
+.auth-demo-box-title i {
+  color: var(--gold);
+}
+.auth-demo-row {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.auth-demo-row:last-child {
+  margin-bottom: 0;
+}
+.auth-demo-row strong {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+.auth-demo-row code {
+  background: var(--white);
+  color: var(--leaf);
+  font-size: 0.75rem;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--cream-dk);
+  font-family: "Courier New", monospace;
+}
+
+/* ── Mobile back link ───────────────────────────────────────── */
+.auth-mobile-back {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  color: var(--forest);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  width: fit-content;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color var(--transition);
+}
+.auth-mobile-back:hover {
+  border-color: var(--forest);
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+  .auth-hero {
+    display: none;
+  }
+  .auth-panel {
+    padding: 36px 24px;
+    align-items: flex-start;
+  }
+  .auth-mobile-back {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-panel {
+    padding: 28px 18px;
+  }
+  .auth-panel-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* ── Focus ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+/* ── Prefers reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
